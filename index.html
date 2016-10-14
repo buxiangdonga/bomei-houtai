@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="win chrome chrome42 webkit webkit537">
+<head>
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+    <title>慈诚医疗</title>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content="慈诚医疗,后台管理系统">
+    <meta name="description" content="慈诚医疗,后台管理系统">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/public.css">
+    <link rel="stylesheet" type="text/css" href="css/biaodanquanxian.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/tanchuang.css"/>
+    <script src="js/jquery.min.js"></script>
+    <script language="javascript" src="js/YMDClass.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#file_upload").change(function () {
+                var $file = $(this);
+                var fileObj = $file[0];
+                var windowURL = window.URL || window.webkitURL;
+                var dataURL;
+                var $img = $("#preview");
+
+                if (fileObj && fileObj.files && fileObj.files[0]) {
+                    dataURL = windowURL.createObjectURL(fileObj.files[0]);
+                    $img.attr('src', dataURL);
+                } else {
+                    dataURL = $file.val();
+                    var imgObj = document.getElementById("preview");
+                    // 两个坑:
+                    // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+                    // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+                    imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                    imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+                }
+            });
+        });
+    </script>
+</head>
+<body style="zoom: 1;">
+<div class="container">
+    <!--页面头部-->
+    <div class="top">
+        <div class="logo">
+            <img src="img/LOGO.png" alt="">
+        </div>
+        <p class="t-btn">退出</p>
+        <div class="person">
+            <img src="img/ptouxiang.png" alt="">
+            <span>DOUBLE</span>
+        </div>
+    </div>
+    <!--页面内容-->
+    <!--<div class="content">-->
+    <!--左侧导航-->
+    <div class="l-nav">
+        <!--医疗系统一级导航-->
+        <div class="l-nav-y l " data-num="111">
+            <div class="icon-l">
+                <img src="img/tiliaoxitong1.png" alt="">
+            </div>
+            <p>医疗系统 <span></span></p>
+            <div class="icon-r">
+                <img src="img/jiahao.png" alt="">
+            </div>
+        </div>
+        <!--医疗系统二级导航-->
+        <div class="y-con">
+            <p data-num="0">会员中心</p>
+            <p id="dingdan" data-num="1">订单&nbsp;<span>6</span><img src="img/jiahao.png" class="erjijiahao" alt="">
+            </p>
+            <!--医疗系统三级导航-->
+            <div class="d-con">
+                <p data-num="10">全部订单</p>
+                <p data-num="11">预约订单</p>
+                <p data-num="12">退款订单</p>
+            </div>
+            <p id="xiaoxi" data-num="2">消息 <span>6</span></p>
+            <p data-num="3">科室列表</p>
+            <p data-num="4">医生列表</p>
+            <p data-num="5">文章/活动</p>
+        </div>
+        <!--分销系统一级导航-->
+        <div class="l-nav-f l" data-num="222" style="border-top: 0;">
+            <div class="icon-l">
+                <img src="img/fenxiaoimg.png" alt="">
+            </div>
+            <p>分销系统&nbsp;<span></span></p>
+            <div class="icon-r">
+                <img src="img/jiahao.png" alt="">
+            </div>
+        </div>
+        <!--分销系统二级导航-->
+        <div class="y-con">
+            <p data-num="60">申请订单</p>
+            <p data-num="6">分销人员</p>
+            <p data-num="7">比例分配</p>
+        </div>
+        <!--提现系统一级导航-->
+        <div class="l-nav-t l" data-num="333" style="border-top: 0;">
+            <div class="icon-l">
+                <img src="img/tixianimg.png" alt="">
+            </div>
+            <p>提现系统&nbsp;<span></span></p>
+            <!--<div class="icon-r">-->
+            <!--<img src="img/jiahao.png" alt="">-->
+            <!--</div>-->
+        </div>
+        <!--权限系统一级导航-->
+        <div class="l-nav-q l" data-num="444" style="border-top: 0;">
+            <div class="icon-l">
+                <img src="img/quanxianfenpeiimg.png" alt="">
+            </div>
+            <p>权限系统&nbsp;<span></span></p>
+            <div class="icon-r">
+                <img src="img/jiahao.png" alt="">
+            </div>
+        </div>
+        <!--权限系统二级导航-->
+        <div class="y-con">
+            <p data-num="8">管理员注册</p>
+            <p data-num="9">权限设置</p>
+            <p data-num="91">管理员列表</p>
+        </div>
+    </div>
+    <!--右侧内容头部-->
+    <div class="r-top">
+        <div class="r-top-l">
+            <p>Welcome,<span id="xitonggg">医疗系统</span></p>
+            <div class="r-top-lcon">
+                <img src="img/r-topduihao.png" alt="">
+                <span>医疗系统</span>
+                <span></span>
+                <span>会员中心</span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="search">
+            <form action="#">
+                <input type="text" placeholder="Search">
+            </form>
+            <div class="search-ico">
+                <img src="img/fangdajing.png" alt="">
+            </div>
+            <p>Search here for all the information you want to know</p>
+        </div>
+    </div>
+    <hr/>
+    <div class="huiyuanzhongxin-con">
+        <div class="xiaoxi">
+            <p>您有新的消息,请注意查收。</p>
+            <div class="cha">
+                <img src="img/cha.png" alt="">
+            </div>
+        </div>
+        <div class="c-btn" style="margin-bottom: 5px">
+            <img src="img/dongjiebtn.png" alt="">
+            <img src="img/shanchubtn1.png" alt="">
+        </div>
+        <div class="huiyuan-nav">
+            <p data-num="21">全部会员</p>
+            <p data-num="22">冻结会员</p>
+        </div>
+        <hr style="color: rgba(239, 226, 226, 0.94);opacity: 0.25;position: relative;z-index: 5;"/>
+        <table class="huiyuan">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>UID</span></th>
+                <th><span>姓名</span></th>
+                <th><span>出生日期</span></th>
+                <th><span>年龄</span></th>
+                <th><span>手机号</span></th>
+                <th><span>身份证号</span></th>
+                <th>
+                    <span id="zhuangtaiitxt">状态</span>
+                    <select id="zhuangtaii">
+                        <option value="1">正常</option>
+                        <option value="2">冻结</option>
+                    </select>
+                    <!--<span>状态</span>-->
+                    <img src="img/xialazhishi.png" alt=""><!-- style="margin-left: 65px;"-->
+                    <!--<div class="h-xiala">-->
+                    <!--<p>正常</p>-->
+                    <!--<p>冻结</p>-->
+                    <!--</div>-->
+                </th>
+                <th style="border:none"></th>
+
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977525</span></th>
+                <th>张靓颖</th>
+                <th>1970-10-06</th>
+                <th>46</th>
+                <th>154021333564</th>
+                <th>233**************5671</th>
+                <th>正常</th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>1970-10-06</th>
+                <th>46</th>
+                <th>154021333564</th>
+                <th>233**************5671</th>
+                <th>正常</th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>1970-10-06</th>
+                <th>46</th>
+                <th>154021333564</th>
+                <th>233**************5671</th>
+                <th>正常</th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>1970-10-06</th>
+                <th>46</th>
+                <th>154021333564</th>
+                <th>233**************5671</th>
+                <th>正常</th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>1970-10-06</th>
+                <th>46</th>
+                <th>154021333564</th>
+                <th>233**************5671</th>
+                <th>正常</th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>1970-10-06</th>
+                <th>46</th>
+                <th>154021333564</th>
+                <th>233**************5671</th>
+                <th>正常</th>
+                <th style="border:none"></th>
+            </tr>
+        </table>
+        <table class="dongjie-con">
+            <tr class="header">
+                <th><span>UID</span></th>
+                <th><span>姓名</span></th>
+                <th><span>出生日期</span></th>
+                <th><span>年龄</span></th>
+                <th><span>手机号</span></th>
+                <th><span>身份证号</span></th>
+                <th><span>状态</span></th>
+                <th style="border:none"></th>
+
+            </tr>
+            <tr class="tbody">
+                <th><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>1970-10-06</th>
+                <th>46</th>
+                <th>154021333564</th>
+                <th>233**************5671</th>
+                <th>冻结</th>
+                <th style="border:none">
+                    <p class="qudong">取消冻结</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>1970-10-06</th>
+                <th>46</th>
+                <th>154021333564</th>
+                <th>233**************5671</th>
+                <th>冻结</th>
+                <th style="border:none">
+                    <p class="qudong">取消冻结</p>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <table class="quanbudingdan biaoge">
+        <tr class="qd-head">
+            <th><span>订单号</span></th>
+            <th><span>姓名</span></th>
+            <th><span>就诊医生</span></th>
+            <th><span>就诊时间</span></th>
+            <th><span>身份证</span></th>
+            <th>
+                <span class="xialatishzii" id="zhuangtaii1txt" style="margin-left: 25px;">订单状态</span>
+                <select id="zhuangtaii1">
+                    <option value="1">已完成</option>
+                    <option value="2">未完成</option>
+                    <option value="3">审核中</option>
+                    <option value="4">退款中</option>
+                    <option value="5">已退款</option>
+                    <option value="6">已拒绝</option>
+                </select>
+                <img src="img/xialazhishi.png" alt="">
+            </th>
+
+            <th style="border:none"></th>
+
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th>已完成</th>
+            <th style="border:none">
+
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th>已完成</th>
+            <th style="border:none">
+
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th>已完成</th>
+            <th style="border:none">
+
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th>已完成</th>
+            <th style="border:none">
+
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th>已完成</th>
+            <th style="border:none">
+
+            </th>
+        </tr>
+    </table>
+    <table class="yuyuedingdan biaoge">
+        <tr class="qd-head">
+            <th><span>订单号</span></th>
+            <th><span>姓名</span></th>
+            <th><span>就诊医生</span></th>
+            <th><span>就诊时间</span></th>
+            <th><span>身份证</span></th>
+            <th style="border:none"></th>
+
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th style="border:none">
+                <p class="biangeng">变更</p>
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th style="border:none">
+                <p class="biangeng">变更</p>
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th style="border:none">
+                <p class="biangeng">变更</p>
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>HP160823290384</span></th>
+            <th>张靓颖</th>
+            <th>金正与</th>
+            <th>2013年8月16日 9:30</th>
+            <th>370************555</th>
+            <th style="border:none">
+                <p class="biangeng">变更</p>
+            </th>
+        </tr>
+    </table>
+    <div class="tuikuan-dingdan">
+        <div class="tuikuan-nav">
+            <p data-num="21">审核中<span>3</span></p>
+            <p data-num="22">退款中<span>3</span></p>
+            <p data-num="23">已退款<span>3</span></p>
+            <p data-num="24">已拒绝<span>3</span></p>
+        </div>
+        <hr style="color: rgba(239, 226, 226, 0.94);opacity: 0.25;position: relative;z-index: 5;"/>
+        <table class="tuikuandingdan biaoge">
+            <tr class="qd-head">
+                <th><span>订单号</span></th>
+                <th><span>姓名</span></th>
+                <th><span>就诊医生</span></th>
+                <th><span>就诊时间</span></th>
+                <th><span>身份证</span></th>
+                <th style="border:none"></th>
+
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th style="border:none">
+                    <p class="jujue">拒绝</p>
+                    <p class="tognyi">同意</p>
+                </th>
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th style="border:none">
+                    <p class="jujue">拒绝</p>
+                    <p class="tognyi">同意</p>
+                </th>
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th style="border:none">
+                    <p class="jujue">拒绝</p>
+                    <p class="tognyi">同意</p>
+                </th>
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th style="border:none">
+                    <p class="jujue">拒绝</p>
+                    <p class="tognyi">同意</p>
+                </th>
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th style="border:none">
+                    <p class="jujue">拒绝</p>
+                    <p class="tognyi">同意</p>
+                </th>
+            </tr>
+        </table>
+        <table class="tuikuanzhong biaoge">
+            <tr class="qd-head">
+                <th><span>订单号</span></th>
+                <th><span>姓名</span></th>
+                <th><span>就诊医生</span></th>
+                <th><span>就诊时间</span></th>
+                <th><span>身份证</span></th>
+                <th><span>状态</span></th>
+                <th style="border:none"></th>
+
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th>退款中</th>
+                <th style="border:none">
+                    <p class="tuikuan-qbtn">确定</p>
+                </th>
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th>退款中</th>
+                <th style="border:none">
+                    <p class="tuikuan-qbtn">确定</p>
+                </th>
+            </tr>
+
+        </table>
+        <table class="tuikuanwancheng biaoge">
+            <tr class="qd-head">
+                <th><span>订单号</span></th>
+                <th><span>姓名</span></th>
+                <th><span>就诊医生</span></th>
+                <th><span>就诊时间</span></th>
+                <th><span>身份证</span></th>
+                <th><span>状态</span></th>
+                <th style="border:none"></th>
+
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th>已完成</th>
+                <th style="border:none">
+                </th>
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th>已完成</th>
+                <th style="border:none">
+                </th>
+            </tr>
+
+        </table>
+        <table class="tuikuanjujue biaoge">
+            <tr class="qd-head">
+                <th><span>订单号</span></th>
+                <th><span>姓名</span></th>
+                <th><span>就诊医生</span></th>
+                <th><span>就诊时间</span></th>
+                <th><span>身份证</span></th>
+                <th><span>状态</span></th>
+                <th style="border:none"></th>
+
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th>已拒绝</th>
+                <th style="border:none">
+                </th>
+            </tr>
+            <tr class="qd-tbody">
+                <th><span>HP160823290384</span></th>
+                <th>张靓颖</th>
+                <th>金正与</th>
+                <th>2013年8月16日 9:30</th>
+                <th>123************111</th>
+                <th>已拒绝</th>
+                <th style="border:none">
+                </th>
+            </tr>
+
+        </table>
+    </div>
+    <div class="xiaoxizhongxin-con">
+        <div class="xiaoxi-nav">
+            <p data-num="31">通知消息<span>3</span></p>
+            <p data-num="32">交易消息<span>3</span></p>
+            <p data-num="33">预约变更<span>3</span></p>
+        </div>
+        <hr style="color: rgba(239, 226, 226, 0.94);opacity: 0.25;position: relative;z-index: 5;"/>
+        <!--通知消息-->
+        <div class="xiaoxi-con x-1">
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+        </div>
+        <!--交易消息-->
+        <div class="xiaoxi-con x-2">
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+        </div>
+        <!--预约变更-->
+        <div class="xiaoxi-con x-3">
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+            <div class="xc">
+                <span>会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。</span>
+                <span>2016年8月22日</span>
+            </div>
+        </div>
+    </div>
+    <!--科室列表-->
+    <div class="keshiliebiao">
+        <div class="k-btn">
+            <img src="img/xinzeng.png" alt="" id="tianjiakeshiii">
+        </div>
+        <!--<div class="eeeeeeeee">-->
+        <!--<p id="tianjiakeshiii">添加科室</p>-->
+        <!--</div>-->
+        <div class="keshi-nav">
+            <p data-num="31">内科</p>
+            <p data-num="32">外科</p>
+            <p data-num="33">骨科</p>
+        </div>
+        <hr style="color: rgba(239, 226, 226, 0.94);opacity: 0.25;position: relative;z-index: 5;"/>
+        <table class="keshiliebiaooo biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>二级科室</span></th>
+                <th><p class="tianjiaaaa">添加</p></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>内分泌科</span></th>
+                <th>
+                    <p class="bianjiiii">编辑</p>
+                    <p class="yichuuuuu">移除</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>内分泌科</span></th>
+                <th>
+                    <p class="bianjiiii">编辑</p>
+                    <p class="yichuuuuu">移除</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>内分泌科</span></th>
+                <th>
+                    <p class="bianjiiii">编辑</p>
+                    <p class="yichuuuuu">移除</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>内分泌科</span></th>
+                <th>
+                    <p class="bianjiiii">编辑</p>
+                    <p class="yichuuuuu">移除</p>
+                </th>
+            </tr>
+        </table>
+
+        <!--<div class="keshi-n">-->
+        <!--<div class="keshi-n-top">-->
+        <!--<span>内科</span>-->
+        <!--<span>+</span>-->
+        <!--</div>-->
+        <!--<hr style="width: 185px;margin: 0 auto;"/>-->
+        <!--<div class="keshi-con">-->
+        <!--<span>内分泌科</span>-->
+        <!--<span>-</span>-->
+        <!--</div>-->
+        <!--<div class="keshi-con">-->
+        <!--<span>内分泌科</span>-->
+        <!--<span>-</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="keshi-nt">-->
+
+        <!--</div>-->
+    </div>
+    <!--医生列表内容-->
+    <div class="yisheng-con">
+        <!--<div class="xiaoxi xiaoxi-2">-->
+        <!--<p>您有新的消息,请注意查收。</p>-->
+        <!--<div class="cha">-->
+        <!--<img src="img/cha.png" alt="">-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="y-btn">
+            <img src="img/xinzeng.png" alt="">
+            <img src="img/bianji.png" alt="">
+            <img src="img/shanchubtn1.png" alt="">
+        </div>
+        <table class="yisheng biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>头像</span></th>
+                <th><span>姓名</span></th>
+                <th>
+                    <span id="keshitxt">科室</span>
+                    <select id="keshi">
+                        <option value="1">外科</option>
+                        <option value="2">内科</option>
+                        <option value="3">五官科</option>
+                        <option value="4">社经科</option>
+                    </select>
+                    <img src="img/xialazhishi.png" style="margin-top: 6px;" alt="">
+                </th>
+                <th><span>医院</span></th>
+                <th><span>职称</span></th>
+                <th>
+                    <span id="yishengjiebietxt">级别</span>
+                    <select id="yishengjiebie">
+                        <option value="1">国家级</option>
+                        <option value="2">国家级</option>
+                        <option value="3">国家级</option>
+                        <option value="4">国家级</option>
+                    </select>
+                    <img src="img/xialazhishi.png" alt="">
+                </th>
+                <th><span>身份证号</span></th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><img src="img/yishengliebiaotouxiang.png" alt=""></th>
+                <th>张靓颖</th>
+                <th>神经科</th>
+                <th>上海交通大学医学院附属瑞金医院</th>
+                <th>主任医师</th>
+                <th>国家级专家</th>
+                <th>233**************5671</th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><img src="img/yishengliebiaotouxiang.png" alt=""></th>
+                <th>张靓颖</th>
+                <th>神经科</th>
+                <th>上海交通大学医学院附属瑞金医院</th>
+                <th>主任医师</th>
+                <th>国家级专家</th>
+                <th>233**************5671</th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><img src="img/yishengliebiaotouxiang.png" alt=""></th>
+                <th>张靓颖</th>
+                <th>神经科</th>
+                <th>上海交通大学医学院附属瑞金医院</th>
+                <th>主任医师</th>
+                <th>国家级专家</th>
+                <th>233**************5671</th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><img src="img/yishengliebiaotouxiang.png" alt=""></th>
+                <th>张靓颖</th>
+                <th>神经科</th>
+                <th>上海交通大学医学院附属瑞金医院</th>
+                <th>主任医师</th>
+                <th>国家级专家</th>
+                <th>233**************5671</th>
+                <th style="border:none"></th>
+            </tr>
+        </table>
+    </div>
+    <div class="wenzhang1">
+        <div class="w-btn">
+            <img src="img/xinzeng.png" alt="">
+            <img src="img/shanchubtn1.png" alt="">
+        </div>
+        <table class="wenzhang1 biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>标题</span></th>
+                <th><span>创建时间</span></th>
+                <th><span>结束时间</span></th>
+                <th style="border:none;padding-left: 0">
+
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>促进语言发展的9个小方法</span></th>
+                <th>2016年9月12日 10:20</th>
+                <th>2016年9月12日 10:20</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="bianji">编辑</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>促进语言发展的9个小方法</span></th>
+                <th>2016年9月12日 10:20</th>
+                <th>2016年9月12日 10:20</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="bianji">编辑</p>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div class="fxshenqingdingdan">
+        <div class="fxsq-nav">
+            <p data-num="311">申请<span>3</span></p>
+            <p data-num="312">拒绝<span>5</span></p>
+        </div>
+        <hr style="color: rgba(239, 226, 226, 0.94);opacity: 0.25;position: relative;z-index: 5;"/>
+        <table class="fx-shenqing biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>UID</span></th>
+                <th><span>姓名</span></th>
+                <th>
+                    <span id="fx-jbtxt">级别</span>
+                    <select id="fx-jb">
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                    </select>
+                    <img src="img/xialazhishi.png" alt="">
+                </th>
+                <th><span>手机号</span></th>
+                <th><span>身份证号</span></th>
+                <th><span>地区</span></th>
+                <!--<th>-->
+                    <!--<span >等级</span>-->
+                    <!--<select id="jibieqq1">-->
+                        <!--<option value="1">一级</option>-->
+                        <!--<option value="2">二级</option>-->
+                        <!--<option value="3">三级</option>-->
+                    <!--</select>-->
+                    <!--<img src="img/xialazhishi.png" alt="">-->
+                <!--</th>-->
+                <th style="border:none;padding-left: 0">
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张玲英</th>
+                <th>一级</th>
+                <th>17156287722</th>
+                <th>236*********555</th>
+                <th>北京</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="ty">同意</p>
+                    <p class="jj">拒绝</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张玲英</th>
+                <th>一级</th>
+                <th>17156287722</th>
+                <th>236*********555</th>
+                <th>山东-济南</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="ty">同意</p>
+                    <p class="jj">拒绝</p>
+                </th>
+            </tr>
+
+        </table>
+        <table class="fx-jujue biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>UID</span></th>
+                <th><span>姓名</span></th>
+                <th>
+                    <span id="fx-jbtxt1">级别</span>
+                    <select id="fx-jb1">
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                        <option value="3">三级</option>
+                    </select>
+                    <img src="img/xialazhishi.png" alt="">
+                </th>
+                <th><span>手机号</span></th>
+                <th><span>身份证号</span></th>
+                <th><span>地区</span></th>
+                <!--<th>-->
+                <!--<span >等级</span>-->
+                <!--<select id="jibieqq1">-->
+                <!--<option value="1">一级</option>-->
+                <!--<option value="2">二级</option>-->
+                <!--<option value="3">三级</option>-->
+                <!--</select>-->
+                <!--<img src="img/xialazhishi.png" alt="">-->
+                <!--</th>-->
+                <th style="border:none;padding-left: 0">
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张玲英</th>
+                <th>一级</th>
+                <th>17156287722</th>
+                <th>236*********555</th>
+                <th>北京</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="fqd">确定</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张玲英</th>
+                <th>一级</th>
+                <th>17156287722</th>
+                <th>236*********555</th>
+                <th>山东-济南</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="fqd">确定</p>
+                </th>
+            </tr>
+
+        </table>
+    </div>
+    <div class="fenxiaorenyuan">
+        <div class="f-btn">
+            <img src="img/dongjiebtn.png" alt="">
+            <img src="img/shanchubtn1.png" alt="">
+        </div>
+        <table class="fenxiaorenyuan biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>UID</span></th>
+                <th><span>姓名</span></th>
+                <th>
+                    <span id="jibieqqtxt3">级别</span>
+                    <select id="jibieqq3">
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                        <option value="3">三级</option>
+                    </select>
+                    <img src="img/xialazhishi.png" alt="">
+                </th>
+                <th><span>手机号</span></th>
+                <th><span>身份证号</span></th>
+                <th><span>地区</span></th>
+                <th><span>从属关系</span></th>
+                <th style="border:none"></th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>一级</th>
+                <th>18468566329</th>
+                <th>370************415</th>
+                <th><span style="float:left;margin-top: 4px;">北京</span><span class="fx-bian">编辑</span></th>
+                <th>无</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="shenfenbiangeng11">身份变更</p>
+                    <form action="#">
+                        <select class="shenfen">
+                            <option value="1">一级身份</option>
+                            <option value="2">二级身份</option>
+                            <option value="3">三级身份</option>
+                        </select>
+                    </form>
+                    <p class="lianmeng1">联盟</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>21546977526</span></th>
+                <th>张靓颖</th>
+                <th>二级</th>
+                <th>18468566329</th>
+                <th>370************415</th>
+                <th><span style="float:left;margin-top: 4px;">山东-济南</span><span class="fx-bian">编辑</span></th>
+                <th>张靓颖</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="shenfenbiangeng11">身份变更</p>
+                    <form action="#">
+                        <select class="shenfen">
+                            <option value="1">一级身份</option>
+                            <option value="2">二级身份</option>
+                            <option value="3">三级身份</option>
+                        </select>
+                    </form>
+                    <p class="lianmeng1">联盟</p>
+                </th>
+            </tr>
+
+        </table>
+    </div>
+    <!--分销系统比例分配-->
+    <div class="fenxiaoxitongbili">
+        <!--饼图位置-->
+    </div>
+    <div class="tixian-con">
+        <div class="xiaoxi-2">
+            <p>您有新的消息,请注意查收。</p>
+            <div class="cha">
+                <img src="img/cha.png" alt="">
+            </div>
+        </div>
+        <div class="tixian-nav">
+            <p data-num="31">待审核<span>3</span></p>
+            <p data-num="32">提现中<span>3</span></p>
+            <p data-num="33">已完成<span>3</span></p>
+        </div>
+        <hr style="color: rgba(239, 226, 226, 0.94);opacity: 0.25;position: relative;z-index: 5;"/>
+        <table class="tixian daishenhe biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>用户名</span></th>
+                <th><span>身份证号</span></th>
+                <th><span>提现单号</span></th>
+                <th><span>金额(/万)</span></th>
+                <th>
+                    <span id="jibieqqtxt">等级</span>
+                    <select id="jibieqq">
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                        <option value="3">三级</option>
+                    </select>
+                    <img src="img/xialazhishi.png" alt="">
+                </th>
+                <th><span>手机号</span></th>
+                <th style="border:none;padding-left: 0">
+                    <!--<p class="tongyi">同意</p>-->
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>我的ID测试</span></th>
+                <th>370************426</th>
+                <th>214556120025</th>
+                <th>15.5</th>
+                <th>2级</th>
+                <th>15726638189</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="tongyi">同意</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>我的ID测试</span></th>
+                <th>370************426</th>
+                <th>214556120025</th>
+                <th>15.5</th>
+                <th>2级</th>
+                <th>15726638189</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="tongyi">同意</p>
+                </th>
+            </tr>
+
+        </table>
+        <table class="tixian tixianzhong biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>用户名</span></th>
+                <th><span>身份证号</span></th>
+                <th><span>提现单号</span></th>
+                <th><span>金额(/万)</span></th>
+                <th>
+                    <span id="jibieqqtxt1">等级</span>
+                    <select id="jibieqq1">
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                        <option value="3">三级</option>
+                    </select>
+                    <img src="img/xialazhishi.png" alt="">
+                </th>
+                <th><span>手机号</span></th>
+                <th style="border:none;padding-left: 0">
+                    <!--<p class="jiesuan">结算</p>-->
+                    <!--<p class="quexiao">取消</p>-->
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>我的ID测试</span></th>
+                <th>370************426</th>
+                <th>214556120025</th>
+                <th>15.5</th>
+                <th>2级</th>
+                <th>15726638189</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="jiesuan">结算</p>
+                    <p class="quexiao">取消</p>
+                </th>
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>我的ID测试</span></th>
+                <th>370************426</th>
+                <th>214556120025</th>
+                <th>15.5</th>
+                <th>2级</th>
+                <th>15726638189</th>
+                <th style="border:none;padding-left: 0">
+                    <p class="jiesuan">结算</p>
+                    <p class="quexiao">取消</p>
+                </th>
+            </tr>
+
+        </table>
+        <table class="tixian yiwancheng biaoge">
+            <tr class="header">
+                <th><img src="img/fangkuang.png" alt=""><span>用户名</span></th>
+                <th><span>身份证号</span></th>
+                <th><span>提现单号</span></th>
+                <th><span>金额(/万)</span></th>
+                <th>
+                    <span id="jibieqqtxt2">等级</span>
+                    <select id="jibieqq2">
+                        <option value="1">一级</option>
+                        <option value="2">二级</option>
+                        <option value="3">三级</option>
+                    </select>
+                    <img src="img/xialazhishi.png" alt="">
+                </th>
+                <th><span>手机号</span></th>
+                <th style="border:none;"><span>状态</span></th>
+                <!--<th style="border:none;padding-left: 0">-->
+                <!--</th>-->
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>我的ID测试</span></th>
+                <th>370************426</th>
+                <th>214556120025</th>
+                <th>15.5</th>
+                <th>2级</th>
+                <th>15726638189</th>
+                <th style="border:none;">成功</th>
+                <!--<th style="border:none;padding-left: 0">-->
+                <!--</th>-->
+            </tr>
+            <tr class="tbody">
+                <th><img src="img/fangkuang.png" alt=""><span>我的ID测试</span></th>
+                <th>370************426</th>
+                <th>214556120025</th>
+                <th>15.5</th>
+                <th>2级</th>
+                <th>15726638189</th>
+                <th style="border:none;">成功</th>
+                <!--<th style="border:none;padding-left: 0">-->
+                <!--</th>-->
+            </tr>
+        </table>
+    </div>
+    <!--权限系统管理员注册-->
+    <div class="guanliyuanzhuce">
+        <div class="qxbiaodan">
+            <!--<div class="qxbd-xiaoxi">-->
+            <!--你有新的消息,请注意查收！-->
+            <!--<span id="xiaoxi-tiaozhuang"></span>-->
+            <!--<span id="qxbd-guanbi">×</span>-->
+            <!--</div>-->
+            <div class="qxbiaodan-cont">
+                <form action="" class="qxbdform" method="post">
+                    <div class="fhang">
+                        <label for="">姓名</label>
+                        <input type="" name="" id="" value="" style="width: 293px;"/>
+                        <img class="yzhengimg"/>
+                        <label for="" style="">性别</label>
+                        <select name="" style="width: 100px;">
+                            <option value="">男</option>
+                            <option value="">女</option>
+                        </select>
+                    </div>
+                    <div class="fhang">
+                        <label for="">手机号</label>
+                        <input type="" name="" id="" value=""/>
+                        <img class="yzhengimg"/>
+                        <span class="yztishi"></span>
+                    </div>
+                    <div class="fhang">
+                        <label for="">身份证</label>
+                        <input type="" name="" id="" value=""/>
+                        <img class="yzhengimg"/>
+                        <span class="yztishi"></span>
+                    </div>
+                    <div class="fhang">
+                        <label for="">用户名</label>
+                        <input type="" name="" id="" value=""/>
+                        <img class="yzhengimg"/>
+                        <span class="yztishi"></span>
+                    </div>
+                    <div class="fhang">
+                        <label for="">密码</label>
+                        <input type="password" name="" id="" value=""/>
+                        <img class="yzhengimg"/>
+                        <span class="yztishi"></span>
+                    </div>
+                    <div class="fhang">
+                        <label for="">确认密码</label>
+                        <input type="password" name="" id="" value=""/>
+                        <img class="yzhengimg"/>
+                        <span class="yztishi"></span>
+                    </div>
+                    <div class="fhang">
+                        <label for="">邮箱</label>
+                        <input type="" name="" id="" value=""/>
+                        <img class="yzhengimg"/>
+                        <span class="yztishi"></span>
+                    </div>
+                    <div class="fhang">
+                        <label for="">验证码</label>
+                        <input type="" name="" id="" value="" style="width: 180px;"/>
+                        <img class="yzhengimg"/>
+                        <span class="yztishi"></span>
+                        <!--验证码-->
+							<span id="yanzhengma">
+								
+							</span>
+                        <span id="huanyzm">看不清？换一张</span>
+                    </div>
+                    <div class="wanchengzhuce">
+                        完成注册
+                    </div>
+                    <input id="qxbd-submit" type="submit" value=""/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--权限系统权限设置-->
+    <div class="guanliyuanquanxain">
+        <div class="qxshezhi">
+            <div class="qxshezhi-left">
+                <div class="fhang">
+                    <label for="">级别1</label>
+                    <input type="" name="" id="" placeholder="管理员1" readonly="readonly"/>
+							<span class="qxsh-shezhi" id="sehzhi1">
+        				设置
+        			</span>
+                </div>
+                <div class="fhang">
+                    <label for="">级别2</label>
+                    <input type="" name="" id="" value="" placeholder="级别名称"/>
+							<span class="qxsh-shezhi" id="sehzhi2">
+        				设置
+        			</span>
+							<span class="qxsh-shanchu" id="qxsh-shanchu1">
+        				删除
+        			</span>
+                </div>
+                <div class="fhang">
+                    <label for="">级别3</label>
+                    <input type="" name="" id="" value="" placeholder="级别名称"/>
+							<span class="qxsh-shezhi" id="sehzhi3">
+        				设置
+        			</span>
+							<span class="qxsh-shanchu" id="qxsh-shanchu2">
+        				删除
+        			</span>
+                </div>
+                <div class="fhang">
+							<span id="qxsz-xinzeng" class="qxsh-shanchu">
+        				新增级别
+        			</span>
+                </div>
+            </div>
+            <div class="qxshezhi-right">
+                <form action="" method="post" class="qxform">
+
+                    <div>
+                        <span style="color: #C2C2C2;font-size: 12px;">管理员1</span>
+                    </div>
+                    <h1 class="qxshezhi-h1"><img class="qxshezhi-h1img" src="img/yiliaoxitongimg.png"/>医疗 <img
+                            class="qx-gouxuan" src="img/fangkuang.png"/></h1>
+                    <div style="margin-top: 10px;">
+                        <label for="hyzx">
+                            <input type="checkbox" name="qxhuiyuan" class="qxcheck" id="hyzx" value=""/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>会员中心
+                        </label>
+                        <label for="qbdingdan">
+                            <input type="checkbox" name="" id="qbdingdan" class="qxcheck" value=""/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>全部订单
+                        </label>
+                        <label for="yydingdan">
+                            <input type="checkbox" name="" id="yydingdan" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>预约订单
+                        </label>
+                        <label for="tkdingdan" style="margin-right: 0px;">
+                            <input type="checkbox" name="" id="tkdingdan" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>退款订单
+                        </label>
+                    </div>
+                    <div>
+                        <label for="qsxiaoxi">
+                            <input type="checkbox" name="" id="qsxiaoxi" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>消息中心
+                        </label>
+                        <label for="qxysliebiao">
+                            <input type="checkbox" name="" id="qxysliebiao" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>医生列表
+                        </label>
+                        <label for="qxwenhuo">
+                            <input type="checkbox" name="" id="qxwenhuo" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>文章/活动
+                        </label>
+                    </div>
+                    <h1 class="qxshezhi-h1"><img class="qxshezhi-h1img" src="img/fenxiaoxitongimg1.png"/>分销 <img
+                            class="qx-gouxuan" src="img/fangkuang.png"/></h1>
+                    <div style="margin-top: 10px;">
+                        <label for="qxfenxiao">
+                            <input type="checkbox" name="" id="qxfenxiao" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>分销人员
+                        </label>
+                        <label for="qxdingdan">
+                            <input type="checkbox" name="" id="qxdingdan" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>订单
+                        </label>
+                    </div>
+                    <h1 class="qxshezhi-h1"><img class="qxshezhi-h1img" src="img/tixianxitongimg1.png"/>提现 <img
+                            class="qx-gouxuan" style="display: none;" src="img/fangkuang.png"/></h1>
+                    <div style="margin-top: 10px;">
+                    </div>
+                    <h1 class="qxshezhi-h1"><img class="qxshezhi-h1img" src="img/quanxianxitongimg1.png"/>权限分配 <img
+                            class="qx-gouxuan" src="img/fangkuang.png"/></h1>
+                    <div style="margin-top: 30px;">
+                        <label for="qxglyzhuce">
+                            <input type="checkbox" name="" id="qxglyzhuce" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>管理员注册
+                        </label>
+                        <label for="qxqxshezhi">
+                            <input type="checkbox" name="" id="qxqxshezhi" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>权限设置
+                        </label>
+                        <label for="glyliebiao">
+                            <input type="checkbox" name="" id="glyliebiao" value="" class="qxcheck"/> <img
+                                class="qxcheckimg" src="img/fangkuang.png"/>管理员列表
+                        </label>
+                    </div>
+                    <div style="width: 100%;position: relative;">
+                        <div id="baocunquanxian" class="qxsh-shanchu">
+                            保存权限
+                        </div>
+                        <input type="submit" id="baocunanniu" value=""/>
+                    </div>
+
+                </form>
+
+                <div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <table class="guannliyuanliebiao biaoge">
+        <tr class="qd-head">
+            <th><span>用户名</span></th>  <!--<img src="img/xialazhishi.png" alt="">-->
+            <th><span>身份证号</span></th>
+            <th><span>姓名</span></th>
+            <th><span>性别</span></th>
+            <th>
+                <span id="jibieqqtxt4">等级</span>
+                <select id="jibieqq4">
+                    <option value="1">一级</option>
+                    <option value="2">二级</option>
+                    <option value="3">三级</option>
+                </select>
+                <img src="img/xialazhishi.png" alt="">
+            </th>
+            <th><span>手机号</span></th>
+            <th style="border:none"></th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>i-00a32f918</span></th>
+            <th>110**************21</th>
+            <th>金正与</th>
+            <th>女</th>
+            <th>
+                <span style="float: left;">1级</span>
+                <span class="dengjibian11">等级变更</span>
+                <select class="dengjibian">
+                    <option value="1">1级</option>
+                    <option value="2">2级</option>
+                    <option value="3">3级</option>
+                </select>
+            </th>
+            <th>18766359950</th>
+            <th style="border:none">
+                <p class="yichu">移除</p>
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>i-00a32f918</span></th>
+            <th>110**************21</th>
+            <th>金正与</th>
+            <th>女</th>
+            <th>
+                <span style="float: left;">1级</span>
+                <span class="dengjibian11">等级变更</span>
+                <select class="dengjibian">
+                    <option value="1">1级</option>
+                    <option value="2">2级</option>
+                    <option value="3">3级</option>
+                </select>
+            </th>
+            <th>18766359950</th>
+            <th style="border:none">
+                <p class="yichu">移除</p>
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>i-00a32f918</span></th>
+            <th>110**************21</th>
+            <th>金正与</th>
+            <th>女</th>
+            <th>
+                <span style="float: left;">1级</span>
+                <span class="dengjibian11">等级变更</span>
+                <select class="dengjibian">
+                    <option value="1">1级</option>
+                    <option value="2">2级</option>
+                    <option value="3">3级</option>
+                </select>
+            </th>
+            <th>18766359950</th>
+            <th style="border:none">
+                <p class="yichu">移除</p>
+            </th>
+        </tr>
+        <tr class="qd-tbody">
+            <th><span>i-00a32f918</span></th>
+            <th>110**************21</th>
+            <th>金正与</th>
+            <th>女</th>
+            <th>
+                <span style="float: left;">1级</span>
+                <span class="dengjibian11">等级变更</span>
+                <select class="dengjibian">
+                    <option value="1">1级</option>
+                    <option value="2">2级</option>
+                    <option value="3">3级</option>
+                </select>
+            </th>
+            <th>18766359950</th>
+            <th style="border:none">
+                <p class="yichu">移除</p>
+            </th>
+        </tr>
+
+    </table>
+</div>
+<!--个人信息弹窗-->
+<style type="text/css">
+    body {
+        position: relative;
+    }
+</style>
+<!--个人信息弹窗-->
+<div class="fxiao-gexintc">
+	<div class="fxiao-gxcont">
+		<div class="huiyuan-till">
+            <p>个人信息</p>
+        </div>
+        <div class="xinxi-ct">
+                <div class="other-tan">
+                    <ul>
+                        <li>
+                            <span class="xi-l">头像</span>
+                            <img class="xi-r" style="width: 33px;" src="img/gexintouxiang.png"/>
+                        </li>
+                        <li>
+                            <span class="xi-l">UID</span>
+                            <span class="xi-r">21546977526</span>
+                        </li>
+                        <li class="qxerweimali" style="cursor: pointer">
+                            <span class="xi-l">二维码</span>
+                            <span style="float: right;font-size: 14px;color: #A9A9A9;font-weight: 600;">&gt;</span>
+                            <img class="xi-r" style="width: 35px;margin-right: 10px;" src="img/gexinerweima.png"/>
+                        </li>
+                        <li>
+                            <span class="xi-l">姓名</span>
+                            <span class="xi-r">张靓颖</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">性别</span>
+                            <span class="xi-r">女</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">出生日期</span>
+                            <span class="xi-r">1989-11-06</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">年龄</span>
+                            <span class="xi-r">28</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">身份证号</span>
+                            <span class="xi-r">2366845458965671</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">手机号</span>
+                            <span class="xi-r">15106472345</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="width: 100%;">
+						<span id="gxqding5" class="gexinanniui">
+							确定
+						</span>
+                </div>
+            </div>
+            <div class="gxerwmxq" style="width: 100%;">
+                <div class="gxewm-header">
+                    <div class="gxewmh-left">
+                        <img style="width: 44px;" src="img/gexintouxiang.png"/>
+                    </div>
+                    <div class="gxewmh-right">
+                        <p style="margin-top: 3px;">张婧颖</p>
+                        <p style="margin-top: 2px;">215668839</p>
+                    </div>
+                </div>
+                <div>
+                    <img style="width: 200px;display: block;margin: auto;margin-bottom: 120px;"
+                         src="img/1q2314213.png"/>
+                </div>
+                <div style="width: 100%;">
+						<span id="gxqding6" class="gexinanniui">
+							确定
+						</span>
+                </div>
+            </div>
+	</div>
+</div>
+<div class="gxtanchuang">
+
+    <div class="tc-cont">
+        <ul class="nav">
+            <li class="navli liact" data-gxxh="0">个人信息</li>
+            <li class="navli" data-gxxh="1">账单</li>
+        </ul>
+        <div class="li-div huigeren" style="display: block;">
+            <div class="xinxi-ct">
+                <div class="other-tan">
+                    <ul>
+                        <li>
+                            <span class="xi-l">头像</span>
+                            <img class="xi-r" style="width: 33px;" src="img/gexintouxiang.png"/>
+                        </li>
+                        <li>
+                            <span class="xi-l">UID</span>
+                            <span class="xi-r">21546977526</span>
+                        </li>
+                        <li class="qxerweimali" style="cursor: pointer">
+                            <span class="xi-l">二维码</span>
+                            <span style="float: right;font-size: 14px;color: #A9A9A9;font-weight: 600;">&gt;</span>
+                            <img class="xi-r" style="width: 35px;margin-right: 10px;" src="img/gexinerweima.png"/>
+                        </li>
+                        <li>
+                            <span class="xi-l">姓名</span>
+                            <span class="xi-r">张靓颖</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">性别</span>
+                            <span class="xi-r">女</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">出生日期</span>
+                            <span class="xi-r">1989-11-06</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">年龄</span>
+                            <span class="xi-r">28</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">身份证号</span>
+                            <span class="xi-r">2366845458965671</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">手机号</span>
+                            <span class="xi-r">15106472345</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">银行卡号</span>
+                            <span class="xi-r">2146 0000 0000 1234 123</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="width: 100%;">
+						<span id="gxqding" class="gexinanniui">
+							确定
+						</span>
+                </div>
+            </div>
+            <div class="gxerwmxq" style="width: 100%;height: 445px;">
+                <div class="gxewm-header">
+                    <div class="gxewmh-left">
+                        <img style="width: 44px;" src="img/gexintouxiang.png"/>
+                    </div>
+                    <div class="gxewmh-right">
+                        <p style="margin-top: 3px;">张婧颖</p>
+                        <p style="margin-top: 2px;">215668839</p>
+                    </div>
+                </div>
+                <div>
+                    <img style="width: 200px;display: block;margin: auto;margin-bottom: 140px;"
+                         src="img/1q2314213.png"/>
+                </div>
+                <div style="width: 100%;">
+						<span id="gxqding3" class="gexinanniui">
+							确定
+						</span>
+                </div>
+            </div>
+
+        </div>
+        <!--账单列表-->
+        <div class="li-div zhangdd">
+            <div class="ld2">
+                <div class="zdliebiaodiv">
+                    <div class="zd-til">
+                           <p>成功订单: <span>4笔</span></p>
+                           <p>累计金额: <span>35.8万</span></p>
+                    </div>
+                    <ul class="zdliebiao">
+                        <li class="zhangdan">
+                            <div class="zdli-left">
+                                <span class="zdleixing">账户入账</span>
+                                <span class="zdshijian">2016-05-21 06:32:00</span>
+                            </div>
+                            <div class="zdli-right">
+                                <span class="zdjine">+1,500.00</span><span class="zdjiantou">&gt;</span>
+                            </div>
+                        </li>
+                        <li class="zhangdan">
+                            <div class="zdli-left">
+                                <span class="zdleixing">提现</span>
+                                <span class="zdshijian">2016-05-21 06:32:00</span>
+                            </div>
+                            <div class="zdli-right">
+                                <span class="zdjine">-1,500.00</span><span class="zdjiantou">&gt;</span>
+                            </div>
+                        </li>
+                        <li class="zhangdan">
+                            <div class="zdli-left">
+                                <span class="zdleixing">账户入账</span>
+                                <span class="zdshijian">2016-05-21 06:32:00</span>
+                            </div>
+                            <div class="zdli-right">
+                                <span class="zdjine">+1,500.00</span><span class="zdjiantou">&gt;</span>
+                            </div>
+                        </li>
+                        <li class="zhangdan">
+                            <div class="zdli-left">
+                                <span class="zdleixing">提现</span>
+                                <span class="zdshijian">2016-05-21 06:32:00</span>
+                            </div>
+                            <div class="zdli-right">
+                                <span class="zdjine">-1,500.00</span><span class="zdjiantou">&gt;</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="gxdibuaniu" style="width: 100%;">
+							<span id="gxqding1" class="gexinanniui">
+								确定
+							</span>
+                    </div>
+                </div>
+                <!--根据点击对象，显示账单详情内容-->
+                <div class="zdxiangqing" style="display: none;">
+                    <ul class="xinxi-ct">
+                        <li style="font-size: 16px;color: #7a7a7a;">
+                            <span class="xi-l">出账金额</span>
+                            <span class="xi-r">2，000，00</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">类型</span>
+                            <span class="xi-r">提现</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">时间</span>
+                            <span class="xi-r">2016-08-21 16:41:00</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">交易单号</span>
+                            <span class="xi-r">4350216090631973197314607</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">剩余零钱</span>
+                            <span class="xi-r">0.10</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">购买人</span>
+                            <span class="xi-r">张玲英</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">购买项目</span>
+                            <span class="xi-r">项目名称</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">购买金额</span>
+                            <span class="xi-r">35.8万</span>
+                        </li>
+                        <li>
+                            <span class="xi-l">购买人手机号</span>
+                            <span class="xi-r">189****2222</span>
+                        </li>
+                    </ul>
+                    <style type="text/css">
+                        #gxqding2 {
+                            margin-left: 96px;
+                        }
+
+                        #gxfanhui2 {
+                            margin-left: 50px;
+                        }
+                    </style>
+                    <div style="width: 100%;margin-top: 30px;">
+							<span id="gxqding2" class="gexinanniui">
+								确定
+							</span>
+							<span id="gxfanhui2" class="gexinanniui">
+								返回
+							</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--删除弹窗-->
+<div class="sfshanchutc">
+    <div class="sfshanchu">
+        <p class="sc-text">
+            是否确定删除
+        </p>
+        <div>
+            <span id="scqueding" class="tc-queding">确定</span>
+            <span id="scquxiao" class="tc-quxiao">取消</span>
+        </div>
+    </div>
+</div>
+<div class="sfdongjietc">
+    <div class="sfshanchu">
+        <p class="sc-text">
+            是否确定冻结
+        </p>
+        <div>
+            <span id="djqueding" class="tc-queding">确定</span>
+            <span id="djquxiao" class="tc-quxiao">取消</span>
+        </div>
+    </div>
+</div>
+
+<div class="xiangqing-tc">
+    <div class="xt-cont">
+        <!--审核中，和退款完成-->
+        <div class="xq1">
+            <div>
+                <div class="left">
+                    <span>科室名称：</span>
+                </div>
+                <div class="right">
+                    <span>外科</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>医生姓名：</span>
+                </div>
+                <div class="right">
+                    <span>黄中和</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>预约项目：</span>
+                </div>
+                <div class="right">
+                    <span>国际会诊</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>患者姓名：</span>
+                </div>
+                <div class="right">
+                    <span>吴迪</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>预约时间：</span>
+                </div>
+                <div class="right">
+                    <span>2016年9月1日 上午9:30分</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>疾病诊断：</span>
+                </div>
+                <div class="right">
+                    <p>男性，54岁，突发胸痛3小时。3小时前跑步追车时突发胸骨后压榨性疼痛，伴...</p>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>疾病描述：</span>
+                </div>
+                <div class="right">
+                    <p>
+                        突发胸痛3小时。3小时前跑步追车时突发胸骨后压榨性疼痛，伴...
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>图像资料：</span>
+                </div>
+                <div class="right">
+                    <img src="img/yingxiang1.png"/>
+                    <img src="img/yingxiang2.png"/>
+                </div>
+            </div>
+            <div style="width: 100%;border-bottom: 1px solid #C2C2C2;margin-top: 10px;"></div>
+            <!--底部按钮-->
+            <!--待审-->
+            <div class="daishen">
+				<span class="tc-queding" id="xiangqingqd" style="display: block;margin: 26px auto 0px;width: 110px;">
+					确定
+				</span>
+            </div>
+        </div>
+        <!--退款中弹窗-->
+        <div class="tuikuan">
+            <div>
+                <div class="left">
+                    <span>订单号：</span>
+                </div>
+                <div class="right">
+                    <span>HP12666449664331</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>医生姓名：</span>
+                </div>
+                <div class="right">
+                    <span>金正雨</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>服务项目：</span>
+                </div>
+                <div class="right">
+                    <span>国际会诊</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>患者姓名：</span>
+                </div>
+                <div class="right">
+                    <span>黄中和</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>预约时间：</span>
+                </div>
+                <div class="right">
+                    <span>2016年8月16日 9点30分</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>就诊医院：</span>
+                </div>
+                <div class="right">
+                    <span>上海交通大学医学附属医院</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>退款原因：</span>
+                </div>
+                <div class="right">
+                    <span>项目预定错误</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>退款金额：</span>
+                </div>
+                <div class="right">
+                    <span>200,000.00元</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>银行卡号：</span>
+                </div>
+                <div class="right">
+                    <span>6241 1234 0000 1111 567</span>
+                </div>
+            </div>
+            <div>
+                <div class="left">
+                    <span>订单状态：</span>
+                </div>
+                <div class="right">
+                    <span id="zhuangtai">退款中</span>
+                </div>
+            </div>
+            <div style="width: 100%;border-bottom: 1px solid #C2C2C2;margin-top: 10px;"></div>
+            <!--底部按钮-->
+            <!--待审-->
+            <div class="tuiqian">
+					<span class="tc-queding" id="tuiqianqd" style="display: block;margin: 26px auto 0px;width: 110px;">
+						确定
+					</span>
+            </div>
+            <div class="tuizhong">
+					<span class="tc-queding" id="tkqueding" style="margin-left: 205px;">
+						确定
+					</span>
+                <!--<span class="tc-quxiao" id="tkquxiao" style="">-->
+                <!--取消-->
+                <!--</span>-->
+            </div>
+            <script type="text/javascript">
+                if ($("#zhuangtai").text() == "退款中") {
+                    $(".tuizhong").css("display", "block");
+                } else {
+                    $(".tuiqian").css("display", "block");
+                }
+            </script>
+        </div>
+        <!--文章活动-->
+        <div class="wenzhang">
+            <p class="biaoti">促进语言发展的9个小方法</p>
+            <div style="width: 100%;;border-bottom: 1px solid #C2C2C2;margin-bottom: 10px;margin-top: 16px;"></div>
+            <img class="wenztu" style="width: 100%;display: block;margin-bottom: 10px;" src="img/xinwen234234.png"/>
+            <div class="wz-cont" style="width: 100%;height: 180px;overflow: auto;">
+                <p>
+                    很多研究已经表明，如果父母能够在孩子童年时代，把孩子当做大人一样，不停地和他聊天、探讨甚至争论，那么在这种环境下成长起来的孩子，将比那些跟随着“沉默是金”的父母一起成长的孩子，拥有更丰富的词汇量，和更清晰、多样的表达方式。那么，父母在每天的生活中可以做哪些事情，来帮助孩子提高语言表达能力呢?
+                </p>
+                <p>
+                    　　1、说说说，不停地说。注意!我们可不是鼓励你成为絮絮叨叨的唐僧。你需要做的，是把日常生活中发生的每一件事情，通过清晰准确、生动形象的表达告诉给孩子。当孩子坐在澡盆里洗澡的时候，你可以不停地对孩子讲：“小肚皮上是不是觉得温温的?”“你听，洗澡水溅在澡盆上‘仆——仆——’的声音……”“好了现在该出水了。看看小手指的指肚，泡在水里的时间长了，都起了小皱褶。”总之，运用你的经验和所有感官，帮助孩子增加体验，并且学会如何描述。
+                </p>
+                <p>
+                    　　2、书籍是人类进步的阶梯。读书，从多早开始都不算早。而孩子从小养成的阅读习
+                </p>
+            </div>
+            <div style="width: 100%;border-bottom: 1px solid #C2C2C2;margin-top: 10px;"></div>
+            <!--底部按钮-->
+            <!--待审-->
+            <div class="daishen">
+					<span class="tc-queding" id="wenzhangqd" style="display: block;margin: 26px auto 0px;width: 110px;">
+						确定
+					</span>
+            </div>
+        </div>
+        <!--我的联盟-->
+        <div class="lianmeng">
+            <p class="biaoti">张婧颖的联盟</p>
+            <p class="l-biangeng">变更</p>
+            <div style="width: 100%;;border-bottom: 1px solid #C2C2C2;margin-top: 16px;"></div>
+            <div class="dailiren-con">
+                <form action="">
+                    <label for="">代理人修改为:</label>
+                    <select class="dailirenn">
+                        <option value="1">张靓颖</option>
+                        <option value="2">王皓</option>
+                        <option value="3">李三</option>
+                    </select>
+                </form>
+            </div>
+            <div class="lmliebiao">
+                <div id="letter"></div>
+                <div class="sort_box">
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>李四</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>王五</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>三级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>三级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>六六</span>
+                            <span>三级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>马奇</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+
+                    </div>
+                    <div class="sort_list">
+                        <div class="num_logo">
+                            <img src="img/touxiangdfd.png" alt="">
+                        </div>
+                        <div class="num_name">
+                            <span>张三</span>
+                            <span>二级</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="initials">
+                    <ul id="daohang">
+                        <li class="lbli"><img src="img/068.png"></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="width: 100%;border-bottom: 1px solid #C2C2C2;margin-top: 10px;"></div>
+            <div class="daishen">
+			<span class="tc-queding" id="lianmengqd" style="display: block;margin: 26px auto 0px;width: 110px;">
+				确定
+			</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!--医生列表-->
+<div class="xiangqing-tc1">
+    <div class="xt-cont1">
+        <form action="" method="post">
+
+            <div style="height: 181px;">
+                <div class="ystop-l">
+                    <div class="fhang">
+                        <label for="">姓名</label>
+                        <input type="" name="" id="" value="" style="width: 120px;"/>
+                        <label for="" style="margin-left: 20px;">性别</label>
+                        <select name="" style="width: 120px;">
+                            <option value="">男</option>
+                            <option value="">女</option>
+                        </select>
+                    </div>
+                    <div class="fhang">
+                        <label for="">身份证</label>
+                        <input type="" name="" id="" value=""/>
+                    </div>
+                    <div class="fhang">
+                        <label for="">手机号</label>
+                        <input type="" name="" id="" value=""/>
+                    </div>
+                    <div class="fhang">
+                        <label for="">医院</label>
+                        <input type="" name="" id="" value=""/>
+                    </div>
+                </div>
+                <div class="ystop-r">
+                    <div class="img-touxiang">
+                        照片
+                        <img id="preview" style="width: 100%;height: 100%;"/>
+                    </div>
+                    <div>
+                        <input type="file" name="" id="file_upload" value="上传" class="shangchuan" style=""/>
+                        <span class="scanniu">上传</span>
+                    </div>
+                </div>
+            </div>
+            <div class="botm">
+                <div class="fhang">
+                    <label for="" style="width: 70px;">一级科室</label>
+                    <select name="" class="keshi" style="width: 30%;margin-left: 64px;">
+                        <option value="">内科</option>
+                        <option value="">内科</option>
+                        <option value="">内科</option>
+                    </select>
+                    <label for="" style="width: 70px;">二级科室</label>
+                    <select name="" class="keshi" style="width: 30%;float: right;margin-right: 8px;">
+                        <option value="">内科</option>
+                        <option value="">内科</option>
+                        <option value="">内科</option>
+                    </select>
+                </div>
+                <div class="fhang">
+                    <label for="">职称</label>
+                    <input type="" name="" id="" value="" style="width: 194px;"/>
+                    <label for="" style="margin-left: 30px;">级别</label>
+                    <input type="" name="" id="" value="" style="width: 194px;"/>
+                </div>
+                <div class="fhang">
+                    <label for="">职称1</label>
+                    <input type="" name="" id="" value=""/>
+                </div>
+                <div class="fhang">
+                    <label for="">职称2</label>
+                    <input type="" name="" id="" value=""/>
+                </div>
+                <div class="fhang">
+                    <label for="">职称3</label>
+                    <input type="" name="" id="" value=""/>
+                </div>
+            </div>
+            <div class="tuizhong1">
+			<span class="tc-queding1" id="ysqueding" style="margin-top: 26px;margin-left: 145px;">
+				保存
+			</span>
+			<span class="tc-quxiao1" id="ysquxiao" style="margin-top: 26px;">
+				取消
+			</span>
+            </div>
+            <!--<input type="submit" value="" style=""/>-->
+        </form>
+    </div>
+</div>
+<!--添加科室-->
+<div class="tianjiakeshi">
+    <div class="sfshanchu">
+        <form action="" method="post">
+            <div class="tianjiakeshi-con">
+                <p class="sc-text">
+                    添加科室
+                </p>
+                <div class="fhang">
+                    <label for="">请输入一级科室名称</label>
+                    <input type="" name="" id="" value=""/>
+                </div>
+                <div class="fhang">
+                    <label for="">请输入二级科室名称</label>
+                    <input type="" name="" id="" value=""/>
+                </div>
+            </div>
+            <div class="bianjichengshi-con">
+                <p class="sc-text">
+                    地区
+                </p>
+                <div class="fhang">
+                    <label for="">请选择省份</label>
+                    <select name="">
+                        <option value="">北京</option>
+                        <option value="">山东</option>
+                        <option value="">河北</option>
+                        <option value="">黑龙江</option>
+                        <option value="">河南</option>
+                    </select>
+                </div>
+                <div class="fhang">
+                    <label for="">请选择城市</label>
+                    <select name="" >
+                        <option value="">济南</option>
+                        <option value="">青岛</option>
+                        <option value="">邯郸</option>
+                        <option value="">聊城</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <span id="tjkeshiqd" class="tc-queding">保存</span>
+                <span id="tjkeshiqx" class="tc-quxiao">取消</span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--内科-->
+<div class="neike">
+    <div class="sfshanchu">
+        <form action="" method="post">
+            <p class="sc-text">
+                内科
+            </p>
+            <div class="fhang">
+                <label for="">请输入二级科室名称：</label>
+                <input type="" name="" id="" value=""/>
+            </div>
+            <div>
+                <span id="neikeqd" class="tc-queding">保存</span>
+                <span id="neikeqx" class="tc-quxiao">取消</span>
+            </div>
+        </form>
+    </div>
+</div>
+<!--会员约定成功-->
+<div class="yueding">
+    <div class="sfshanchu">
+        <p class="sc-text">
+            会员21546977526预定的2016年9月20号国际体检项目，已经预定成功。
+        </p>
+        <div>
+            <span id="xiaoxixiang" class="tc-queding">确定</span>
+        </div>
+    </div>
+
+
+</div>
+<!--预约时间-->
+<div class="yuyuesj">
+    <div class="sfshanchu">
+        <div class="sc-text">
+            <div class="fhang">
+                <label for="">预约时间：</label>
+                <!--<select name="year1" style="width: 80px;"></select>
+                <select name="month1" style="width: 80px;"></select>
+                <select name="day1" style="width: 80px;"></select>
+                <script type="text/javascript">
+                    new YMDselect('year1','month1','day1');
+                </script>-->
+                <input type="date" name="" id="" value=""/>
+            </div>
+            <div class="fhang">
+                <label for="">医生姓名：</label>
+                <select name="">
+                    <option value="">黄中和</option>
+                    <option value="">黄中和</option>
+                    <option value="">黄中和</option>
+                    <option value="">黄中和</option>
+                    <option value="">黄中和</option>
+                    <option value="">黄中和</option>
+                    <option value="">黄中和</option>
+                    <option value="">黄中和</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <span id="yuyuesjqd" class="tc-queding">确定</span>
+            <span id="yuyuesjqx" class="tc-quxiao">取消</span>
+        </div>
+    </div>
+</div>
+<!--上传图片-->
+<div class="tc-shangchuanimg">
+    <div class="tcscimg-cont">
+        <div style="position: relative;" class="shubiaoy">
+            <span class="tcfiletext">上传图片:</span><span class="tcclickfile">点击上传</span><span
+                style="font-size: 12px;color: #C2C2C2;">图片大小607×316</span>
+            <input type="file" name="" id="tcshangchuanfile" value=""/>
+        </div>
+        <div>
+            <img style="width: 100%;margin-top: 15px;margin-bottom: 15px;" src="img/4erw28224.png"/>
+        </div>
+        <div>
+            <span class="tcfiletext">链接地址:</span>
+        </div>
+        <div>
+            <input class="tcshangcipt" type="url" name="" id="" value=""/>
+        </div>
+        <div>
+            <span id="tcshangchuanqd" class="tc-queding">确定</span>
+            <span id="tcshangchuanqx" class="tc-quxiao">取消</span>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/index.js"></script>
+<script src="js/biaodanquanxian.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.charfirst.pinyin.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/sort.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/tankuang.js" type="text/javascript" charset="utf-8"></script>
+</html>

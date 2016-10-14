@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="win chrome chrome42 webkit webkit537">
+<head>
+    <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+    <title>慈诚医疗</title>
+    <meta charset="UTF-8">
+    <meta name="Keywords" content="慈诚医疗,后台管理系统">
+    <meta name="description" content="慈诚医疗,后台管理系统">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/public.css">
+    <script src="js/jquery.min.js"></script>
+    <style type="text/css">
+        .container {
+            background-image: url(img/shouyeindexbeijng.png);
+            background-size: 100% 100%;
+        }
+
+        h1 {
+            color: #48ceff;
+            font-size: 30px;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            margin-top: 220px;
+            margin-bottom: 60px;
+        }
+
+        .fhang {
+            display: block;
+            margin: auto;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .formcont {
+            display: block;
+            margin: auto;
+            width: 388px;
+        }
+
+        #indexsbt {
+            width: 100%;
+            height: 45px;
+            background-color: #48ceff;
+            text-align: center;
+            line-height: 45px;
+            color: white;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .dengipt {
+            width: 200px;
+            height: 30px;
+            background-color: #fafafa;
+            font-size: 16px;
+        }
+
+        #dengluyh {
+            position: absolute;
+            top: 7px;
+            left: 90px;
+        }
+
+        #denglupw {
+            position: absolute;
+            top: 7px;
+            left: 90px;
+        }
+
+        .shurutishi {
+            color: red;
+            font-size: 12px;
+            position: absolute;
+            bottom: -16px;
+            /*left: 66px;*/
+        }
+    </style>
+</head>
+<body style="zoom: 1;">
+<div class="container">
+    <!--页面头部-->
+    <div class="top">
+        <div class="logo">
+            <img src="img/LOGO.png" alt="">
+        </div>
+        <!--<p class="t-btn">退出</p>-->
+        <div class="person">
+            <!--<img src="img/ptouxiang.png" alt="">
+            <span>DOUBLE</span>-->
+        </div>
+    </div>
+    <div class="formcont">
+        <h1>慈城后台管理</h1>
+        <div class="indexform">
+            <form action="" method="post">
+                <div class="fhang">
+                    <img src="img/yonghushuru.png"/>
+                    <input type="text" name="" id="dengluyh" class="dengipt" value=""/>
+                </div>
+                <div class="fhang">
+                    <img src="img/mimashuru.png"/>
+                    <input type="password" name="" id="denglupw" class="dengipt" value=""/>
+                    <span class="shurutishi">账户名与密码不匹配，请重新输入</span>
+                </div>
+                <div class="fhang">
+                    <input type="submit" id="indexsbt" value="登录"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
